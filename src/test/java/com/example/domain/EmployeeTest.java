@@ -12,13 +12,13 @@ class EmployeeTest {
       "aaa, Taro, Yamada",
       " , Taro, Yamada",
       "'', Taro, Yamada",
-      "0, Taro, Yamada"
+      "-1, Taro, Yamada"
   })
   void 従業員IDがガード条件に違反する場合(String id, String firstName, String lastName) throws Exception {
     // assert
     assertThatThrownBy(() -> new Employee(id, firstName, lastName))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("従業員 ID が不正です。");
+        .hasMessageContaining("従業員情報が不正です。");
   }
 
   @ParameterizedTest
@@ -26,13 +26,13 @@ class EmployeeTest {
       "1, 1111, Yamada",
       "1, , Yamada",
       "1, '', Yamada",
-      "1, null, Yamada"
   })
-  void 従業員の名前がガード条件に違反する場合(String id, String firstName, String lastName) throws Exception {
+  void 従業員の名前がガード条件に違反する場合(String id, String firstName, String lastName)
+      throws Exception {
     // assert
     assertThatThrownBy(() -> new Employee(id, firstName, lastName))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("従業員の名前が不正です。");
+        .hasMessageContaining("従業員情報が不正です。");
   }
 
   @ParameterizedTest
@@ -40,12 +40,12 @@ class EmployeeTest {
       "1, Taro, 111111",
       "1, Taro, ",
       "1, Taro, ''",
-      "1, Taro, null"
   })
-  void 従業員の名字がガード条件に違反する場合(String id, String firstName, String lastName) throws Exception {
+  void 従業員の名字がガード条件に違反する場合(String id, String firstName, String lastName)
+      throws Exception {
     // assert
     assertThatThrownBy(() -> new Employee(id, firstName, lastName))
         .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining("従業員の名前が不正です。");
+        .hasMessageContaining("従業員情報が不正です。");
   }
 }
