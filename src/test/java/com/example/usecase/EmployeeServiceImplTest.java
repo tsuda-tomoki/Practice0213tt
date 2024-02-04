@@ -1,4 +1,4 @@
-package com.example.infrastructure;
+package com.example.usecase;
 
 import com.example.domain.Employee;
 import com.example.domain.EmployeeRepository;
@@ -10,16 +10,15 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-class EmployeeRepositoryImplTest {
-
+class EmployeeServiceImplTest {
   @Mock
-  private EmployeeMapper employeeMapper;
+  private EmployeeRepository employeeRepository;
 
   @InjectMocks
-  private EmployeeRepository employeeRepository = new EmployeeRepositoryImpl();
+  private EmployeeServiceImpl employeeService;
 
   @BeforeEach
   void setUp() {
@@ -34,10 +33,10 @@ class EmployeeRepositoryImplTest {
         new Employee("2", "Jiro", "Yamada")
     );
 
-    when(employeeMapper.findAll()).thenReturn(expected);
+    when(employeeRepository.findByAllEmployeesOfRepository()).thenReturn(expected);
 
     // execute
-    List<Employee> actual = employeeRepository.findByAllEmployeesOfRepository();
+    List<Employee> actual = employeeService.findByAllEmployees();
 
     // assert
     assertThat(actual).isEqualTo(expected);
