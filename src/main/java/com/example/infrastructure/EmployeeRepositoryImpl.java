@@ -3,6 +3,7 @@ package com.example.infrastructure;
 import com.example.domain.Employee;
 import com.example.domain.EmployeeRepository;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

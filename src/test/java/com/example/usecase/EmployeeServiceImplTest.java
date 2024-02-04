@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class EmployeeServiceImplTest {
@@ -36,7 +36,7 @@ class EmployeeServiceImplTest {
     when(employeeRepository.findByAllEmployeesOfRepository()).thenReturn(expected);
 
     // execute
-    List<Employee> actual = employeeService.findByAllEmployees();
+    List<Employee> actual = employeeService.findByAllEmployeesOfService();
 
     // assert
     assertThat(actual).isEqualTo(expected);

@@ -6,5 +6,5 @@ import java.util.List;
  * サービスクラスのインターフェイス.
  */
 public interface EmployeeService {
-  List<Employee> findByAllEmployees();
+  List<Employee> findByAllEmployeesOfService();
 }

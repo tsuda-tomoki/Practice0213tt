@@ -1,7 +1,6 @@
 package com.example.infrastructure;
 
 import com.example.domain.Employee;
-import com.example.domain.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +18,7 @@ class EmployeeRepositoryImplTest {
   private EmployeeMapper employeeMapper;
 
   @InjectMocks
-  private EmployeeRepository employeeRepository = new EmployeeRepositoryImpl();
+  private EmployeeRepositoryImpl employeeRepository;
 
   @BeforeEach
   void setUp() {
