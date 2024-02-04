@@ -15,7 +15,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   private EmployeeMapper employeeMapper;
 
   @Override
-  public List<Employee> findByAllEmployees() {
+  public List<Employee> findByAllEmployeesOfRepository() {
     return employeeMapper.findAll();
   }
 }
