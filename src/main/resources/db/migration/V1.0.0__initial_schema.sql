@@ -1,8 +1,4 @@
-CREATE TABLE employees (
-    id varchar(10) PRIMARY KEY,
-    first_name varchar(100),
-    last_name varchar(100)
-);
+CREATE TABLE employees (id varchar(10) PRIMARY KEY,first_name varchar(100),last_name varchar(100));
 
 CREATE SEQUENCE IF NOT EXISTS EMPLOYEE_ID_SEQ
     INCREMENT BY 1

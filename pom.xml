@@ -30,6 +30,9 @@
     <commons-collections4.version>4.1</commons-collections4.version>
     <mybatis-spring-boot-starter-test.version>2.2.0</mybatis-spring-boot-starter-test.version>
     <flywaydb.version>9.22.3</flywaydb.version>
+    <testcontainers.version>1.19.1</testcontainers.version>
+    <database-rider.version>1.41.0</database-rider.version>
+    <h2.version>2.2.224</h2.version>
 
     <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
@@ -77,8 +80,8 @@
     <!-- ============================ -->
 
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
 
@@ -101,12 +104,6 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>${org-postgresql.version}</version>
     </dependency>
 
     <dependency>
@@ -196,6 +193,34 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.github.database-rider</groupId>
+      <artifactId>rider-junit5</artifactId>
+      <version>${database-rider.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>${h2.version}</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -253,28 +278,28 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.3.0</version>
       </plugin>
-      <plugin>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-maven-plugin</artifactId>
-        <version>${flywaydb.version}</version>
-        <configuration>
-          <url>jdbc:postgresql://localhost:5432/sample</url>
-          <user>user</user>
-          <password>password</password>
-          <locations>
-            <location>filesystem:./src/main/resources/db.migration</location>
-          </locations>
-        </configuration>
-        <executions>
-          <execution>
-            <id>test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>migrate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.flywaydb</groupId>-->
+<!--        <artifactId>flyway-maven-plugin</artifactId>-->
+<!--        <version>${flywaydb.version}</version>-->
+<!--        <configuration>-->
+<!--          <url>jdbc:postgresql://localhost:5432/sample</url>-->
+<!--          <user>user</user>-->
+<!--          <password>password</password>-->
+<!--&lt;!&ndash;          <locations>&ndash;&gt;-->
+<!--&lt;!&ndash;            <location>filesystem:./src/main/resources/db.migration</location>&ndash;&gt;-->
+<!--&lt;!&ndash;          </locations>&ndash;&gt;-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>test</id>-->
+<!--            <phase>test</phase>-->
+<!--            <goals>-->
+<!--              <goal>migrate</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
     </plugins>
   </build>
 </project>
