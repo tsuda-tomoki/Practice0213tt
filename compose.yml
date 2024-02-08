@@ -1,0 +1,58 @@
+version: "3"
+services:
+  examination1:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    networks:
+      - ex1-nw
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: "curl -f http://localhost:8080/actuator/health || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    environment:
+      LOGGING_LEVEL_ROOT: INFO
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sample
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: broker:29092
+      LOGGING_CONFIG: classpath:logback-spring-plain.xml
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+
+  postgres:
+    image: postgres:11.9-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sample
+      TZ: "Asia/Tokyo"
+    networks:
+      - ex1-nw
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  sonarqube:
+    image: sonarqube:10.3.0-community
+    ports:
+      - "9000:9000"
+    profiles: [ "local" ]
+
+networks:
+  ex1-nw:
+    driver: bridge
