@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  * employeeService の実装クラス.
  */
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
   private EmployeeRepository employeeRepository;
 

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * EmployeeRepository の実装クラス.
  */
 @Repository
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepository {
   private EmployeeMapper employeeMapper;
 
