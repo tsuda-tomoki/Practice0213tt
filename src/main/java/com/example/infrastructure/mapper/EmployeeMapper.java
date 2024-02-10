@@ -13,4 +13,7 @@ public interface EmployeeMapper {
 
   @Select("SELECT id, first_name, last_name FROM employees")
   List<Employee> findAll();
+
+  @Select("SELECT id, first_name, last_name FROM employees WHERE id = #{id}")
+  Employee findById(String id);
 }
