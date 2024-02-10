@@ -1,6 +1,7 @@
 package com.example.domain.service;
 
 import com.example.domain.entity.Employee;
+import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
 
 /**
@@ -11,6 +12,6 @@ public interface EmployeeService {
 
   Employee findByEmployeeIdOfService(String id);
 
-  Employee insertByEmployeeOfService(Employee employee);
+  PostEmployeeRequest insertByEmployeeOfService(PostEmployeeRequest postEmployeeRequest);
 
 }

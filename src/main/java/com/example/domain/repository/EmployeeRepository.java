@@ -1,6 +1,7 @@
 package com.example.domain.repository;
 
 import com.example.domain.entity.Employee;
+import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
 
 /**
@@ -11,5 +12,5 @@ public interface EmployeeRepository {
 
   Employee findByEmployeeOfRepository(String id);
 
-  Employee insertByEmployeeOfRepositroy(Employee employee);
+  PostEmployeeRequest insertByEmployeeOfRepositroy(PostEmployeeRequest postEmployeeRequest);
 }

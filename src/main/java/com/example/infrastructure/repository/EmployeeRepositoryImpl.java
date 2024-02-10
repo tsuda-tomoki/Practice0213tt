@@ -3,6 +3,7 @@ package com.example.infrastructure.repository;
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
 import com.example.infrastructure.mapper.EmployeeMapper;
+import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   }
 
   @Override
-  public Employee insertByEmployeeOfRepositroy(Employee employee) {
-    return employee;
+  public PostEmployeeRequest insertByEmployeeOfRepositroy(PostEmployeeRequest postEmployeeRequest) {
+    return postEmployeeRequest;
   }
 }

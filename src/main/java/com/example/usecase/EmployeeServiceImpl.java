@@ -3,6 +3,7 @@ package com.example.usecase;
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
 import com.example.domain.service.EmployeeService;
+import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   @Transactional
-  public Employee insertByEmployeeOfService(Employee employee) {
-    return employeeRepository.insertByEmployeeOfRepositroy(employee);
+  public PostEmployeeRequest insertByEmployeeOfService(PostEmployeeRequest postEmployeeRequest) {
+    return employeeRepository.insertByEmployeeOfRepositroy(postEmployeeRequest);
   }
 
 }
