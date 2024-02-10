@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @AllArgsConstructor
 public class EmployeeRepositoryImpl implements EmployeeRepository {
+
   private EmployeeMapper employeeMapper;
 
   @Override
@@ -23,5 +24,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   @Override
   public Employee findByEmployeeOfRepository(String id) {
     return employeeMapper.findById(id);
+  }
+
+  @Override
+  public Employee insertByEmployeeOfRepositroy(Employee employee) {
+    return employee;
   }
 }

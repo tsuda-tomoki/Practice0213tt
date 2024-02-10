@@ -10,4 +10,6 @@ public interface EmployeeRepository {
   List<Employee> findByAllEmployeesOfRepository();
 
   Employee findByEmployeeOfRepository(String id);
+
+  Employee insertByEmployeeOfRepositroy(Employee employee);
 }
