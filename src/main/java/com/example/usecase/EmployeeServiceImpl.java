@@ -21,4 +21,10 @@ public class EmployeeServiceImpl implements EmployeeService {
   public List<Employee> findByAllEmployeesOfService() {
     return employeeRepository.findByAllEmployeesOfRepository();
   }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Employee findByEmployeeIdOfService(String id) {
+    return employeeRepository.findByEmployeeOfRepository(id);
+  }
 }
