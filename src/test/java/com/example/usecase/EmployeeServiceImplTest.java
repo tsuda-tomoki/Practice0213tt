@@ -55,4 +55,18 @@ class EmployeeServiceImplTest {
     // assert
     assertThat(actual).isEqualTo(expected);
   }
+
+  @Test
+  void 追加ができる場合() {
+    // setup
+    Employee expected = new Employee("3", "Hanako", "Shirato");
+
+    when(employeeRepository.insertByEmployeeOfRepositroy(expected)).thenReturn(expected);
+
+    // execute
+    Employee actual = employeeService.insertByEmployeeOfService(expected);
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
 }
