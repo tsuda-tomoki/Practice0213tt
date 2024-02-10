@@ -37,8 +37,8 @@ class EmployeeMapperTest {
   }
 
   @Test
-  @DataSet(value = "test-yml/all-Employees.yml")
-  @ExpectedDataSet(value = "test-yml/all-Employees.yml")
+  @DataSet(value = "test-yml/two-Employees.yml")
+  @ExpectedDataSet(value = "test-yml/two-Employees.yml")
   void 全件検索ができる場合() throws Exception {
     // setup
     List<Employee> expected = List.of(
@@ -65,5 +65,19 @@ class EmployeeMapperTest {
 
     // assert
     assertThat(actual).isEqualTo(expected);
+  }
+
+  @Test
+  @DataSet(value = "test-yml/two-Employees.yml")
+  @ExpectedDataSet(value = "test-yml/three-Employees.yml")
+  void 追加ができる場合() throws Exception {
+    // setup
+    Employee employee = new Employee("3", "Hanako", "Shirato");
+
+    // execute
+    Integer actual = sut.insert(employee);
+
+    // assert
+    assertThat(actual).isEqualTo(1);
   }
 }
