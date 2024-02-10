@@ -57,4 +57,18 @@ class EmployeeRepositoryImplTest {
     // assert
     assertThat(actual).isEqualTo(expected);
   }
+
+  @Test
+  void 追加ができる場合() {
+    // setup
+    Employee expected = new Employee("3", "Hanako", "Shirato");
+
+    when(employeeMapper.insert(expected)).thenReturn(1);
+
+    // execute
+    Employee actual = employeeRepository.insertByEmployeeOfRepositroy(expected);
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
 }
