@@ -19,4 +19,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   public List<Employee> findByAllEmployeesOfRepository() {
     return employeeMapper.findAll();
   }
+
+  @Override
+  public Employee findByEmployeeOfRepository(String id) {
+    return employeeMapper.findById(id);
+  }
 }

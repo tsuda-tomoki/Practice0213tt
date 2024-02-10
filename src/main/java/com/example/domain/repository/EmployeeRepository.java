@@ -8,4 +8,6 @@ import java.util.List;
  */
 public interface EmployeeRepository {
   List<Employee> findByAllEmployeesOfRepository();
+
+  Employee findByEmployeeOfRepository(String id);
 }
