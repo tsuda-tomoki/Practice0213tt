@@ -3,6 +3,7 @@ package com.example.infrastructure.mapper;
 import com.example.domain.entity.Employee;
 import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -23,5 +24,8 @@ public interface EmployeeMapper {
   @Insert("INSERT INTO employees (id, first_name, last_name) VALUES (nextval('EMPLOYEE_ID_SEQ'), #{firstName}, #{lastName})")
   @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
   void insert(PostEmployeeRequest postEmployeeRequest);
+
+  @Delete("DELETE FROM employees WHERE id = #{id}")
+  Integer delete(String id);
 
 }
