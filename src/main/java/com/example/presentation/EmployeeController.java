@@ -1,8 +1,7 @@
 package com.example.presentation;
 
-import com.example.domain.Employee;
-import com.example.domain.EmployeeService;
-import java.util.List;
+import com.example.domain.service.EmployeeService;
+import com.example.presentation.response.AllEmployeesResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

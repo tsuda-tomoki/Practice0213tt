@@ -1,6 +1,6 @@
-package com.example.presentation;
+package com.example.presentation.response;
 
-import com.example.domain.Employee;
+import com.example.domain.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 

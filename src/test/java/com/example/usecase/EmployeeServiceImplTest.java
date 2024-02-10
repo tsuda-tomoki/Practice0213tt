@@ -1,7 +1,7 @@
 package com.example.usecase;
 
-import com.example.domain.Employee;
-import com.example.domain.EmployeeRepository;
+import com.example.domain.entity.Employee;
+import com.example.domain.repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

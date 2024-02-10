@@ -1,10 +1,10 @@
-package com.example.infrastructure;
+package com.example.infrastructure.repository;
 
-import com.example.domain.Employee;
-import com.example.domain.EmployeeRepository;
+import com.example.domain.entity.Employee;
+import com.example.domain.repository.EmployeeRepository;
+import com.example.infrastructure.mapper.EmployeeMapper;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 /**

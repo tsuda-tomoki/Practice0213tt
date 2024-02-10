@@ -2,6 +2,7 @@ package com.example.domain;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.example.domain.entity.Employee;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

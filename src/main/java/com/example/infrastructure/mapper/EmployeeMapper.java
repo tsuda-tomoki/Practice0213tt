@@ -1,6 +1,6 @@
-package com.example.infrastructure;
+package com.example.infrastructure.mapper;
 
-import com.example.domain.Employee;
+import com.example.domain.entity.Employee;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

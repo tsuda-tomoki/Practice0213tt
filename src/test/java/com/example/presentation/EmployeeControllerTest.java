@@ -4,8 +4,8 @@ import static com.example.TestUtils.readFrom;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.domain.Employee;
-import com.example.domain.EmployeeService;
+import com.example.domain.entity.Employee;
+import com.example.domain.service.EmployeeService;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

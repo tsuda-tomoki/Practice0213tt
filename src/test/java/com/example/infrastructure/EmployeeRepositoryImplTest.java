@@ -1,6 +1,8 @@
 package com.example.infrastructure;
 
-import com.example.domain.Employee;
+import com.example.domain.entity.Employee;
+import com.example.infrastructure.mapper.EmployeeMapper;
+import com.example.infrastructure.repository.EmployeeRepositoryImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,5 +1,6 @@
-package com.example.domain;
+package com.example.domain.service;
 
+import com.example.domain.entity.Employee;
 import java.util.List;
 
 /**

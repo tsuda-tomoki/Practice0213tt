@@ -2,7 +2,8 @@ package com.example.infrastructure;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.domain.Employee;
+import com.example.domain.entity.Employee;
+import com.example.infrastructure.mapper.EmployeeMapper;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.connection.ConnectionHolder;
 import com.github.database.rider.core.api.dataset.DataSet;
