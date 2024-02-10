@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * コントローラークラスの例外ハンドリングクラス.
+ */
 @ControllerAdvice
 public class ExceptionsController {
+
   @ExceptionHandler
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionResponse handleError(
