@@ -37,8 +37,8 @@ class EmployeeMapperTest {
   }
 
   @Test
-  @DataSet(value = "test-yml/setup/select-all-setup.yml")
-  @ExpectedDataSet(value = "test-yml/expected/select-all-expected.yml")
+  @DataSet(value = "test-yml/all-Employees.yml")
+  @ExpectedDataSet(value = "test-yml/all-Employees.yml")
   void 全件検索ができる場合() throws Exception {
     // setup
     List<Employee> expected = List.of(
@@ -48,6 +48,20 @@ class EmployeeMapperTest {
 
     // execute
     List<Employee> actual = sut.findAll();
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
+
+  @Test
+  @DataSet(value = "test-yml/one-Employee.yml")
+  @ExpectedDataSet(value = "test-yml/one-Employee.yml")
+  void ID指定で検索ができる場合() throws Exception {
+    // setup
+    Employee expected = new Employee("1", "Taro", "Yamada");
+
+    // execute
+    Employee actual = sut.findById("1");
 
     // assert
     assertThat(actual).isEqualTo(expected);
