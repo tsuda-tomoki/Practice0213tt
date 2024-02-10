@@ -4,9 +4,3 @@ spring:
     url: ${EMPLOYEE_DB_URL}
     username: ${EMPLOYEE_DB_USER}
     password: ${EMPLOYEE_DB_PASS_WORD}
-    sql:
-      init:
-        mode: always
-    init:
-      encoding: utf-8
-    driver-class-name: org.postgresql.Driver
