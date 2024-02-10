@@ -49,4 +49,16 @@ class EmployeeControllerTest {
         .andExpect(status().isOk())
         .andExpect(content().json(readFrom("test-json/AllEmployee.json")));
   }
+
+  @Test
+  void GETでエンドポイントにIDが指定された場合ID検索が実行される() throws Exception {
+    // setup
+    Employee expected = new Employee("1", "Taro", "Yamada");
+
+    doReturn(expected).when(employeeService).findByEmployeeIdOfService(expected.id());
+
+    mockMvc.perform(get("/v1/employees/1"))
+        .andExpect(status().isOk())
+        .andExpect(content().json(readFrom("test-json/IdEmployee.json")));
+  }
 }
