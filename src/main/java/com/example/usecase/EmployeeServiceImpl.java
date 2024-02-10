@@ -27,4 +27,11 @@ public class EmployeeServiceImpl implements EmployeeService {
   public Employee findByEmployeeIdOfService(String id) {
     return employeeRepository.findByEmployeeOfRepository(id);
   }
+
+  @Override
+  @Transactional
+  public Employee insertByEmployeeOfService(Employee employee) {
+    return employeeRepository.insertByEmployeeOfRepositroy(employee);
+  }
+
 }

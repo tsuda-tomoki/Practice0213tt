@@ -11,4 +11,6 @@ public interface EmployeeService {
 
   Employee findByEmployeeIdOfService(String id);
 
+  Employee insertByEmployeeOfService(Employee employee);
+
 }
