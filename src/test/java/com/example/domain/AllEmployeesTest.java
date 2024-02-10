@@ -1,5 +1,6 @@
 package com.example.domain;
 
+import com.example.presentation.AllEmployeesResponse;
 import org.junit.jupiter.api.Test;
 
 import static java.util.Collections.emptyList;
@@ -10,7 +11,7 @@ class AllEmployeesTest {
   @Test
   void 従業員リストが空の場合() {
     // assert
-    assertThatThrownBy(() -> new AllEmployees(emptyList()))
+    assertThatThrownBy(() -> new AllEmployeesResponse(emptyList()))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("従業員リストが不正です。");
   }
@@ -18,7 +19,7 @@ class AllEmployeesTest {
   @Test
   void 従業員リストがnullの場合() {
     // assert
-    assertThatThrownBy(() -> new AllEmployees(null))
+    assertThatThrownBy(() -> new AllEmployeesResponse(null))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("従業員リストが不正です。");
   }
