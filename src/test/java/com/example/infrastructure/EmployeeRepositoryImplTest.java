@@ -43,4 +43,18 @@ class EmployeeRepositoryImplTest {
     // assert
     assertThat(actual).isEqualTo(expected);
   }
+
+  @Test
+  void ID検索ができる場合() {
+    // setup
+    Employee expected = new Employee("1", "Taro", "Yamada");
+
+    when(employeeMapper.findById(expected.id())).thenReturn(expected);
+
+    // execute
+    Employee actual = employeeRepository.findByEmployeeOfRepository("1");
+
+    // assert
+    assertThat(actual).isEqualTo(expected);
+  }
 }
