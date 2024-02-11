@@ -4,6 +4,7 @@ import com.example.domain.entity.Employee;
 import com.example.domain.service.EmployeeService;
 import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
+import com.example.presentation.request.UpdateEmployeeRequest;
 import com.example.presentation.response.AllEmployeesResponse;
 import com.example.presentation.response.ExceptionHandResponse;
 import java.net.URI;
@@ -16,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,10 +63,9 @@ public class EmployeeController {
     employeeService.deleteByEmployeeOfService(id);
   }
 
-  @ExceptionHandler
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {
-    String message = e.getMessage();
-    return new ExceptionHandResponse("0003", message, Collections.emptyList());
+  @PatchMapping("/v1/employees/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void updateByEmployee(@PathVariable String id, @RequestBody @Validated UpdateEmployeeRequest updateEmployeeRequest) {
+    employeeService.updateByEmployeeOfService(id, updateEmployeeRequest);
   }
 }
