@@ -2,6 +2,7 @@ package com.example.domain.service;
 
 import com.example.domain.entity.Employee;
 import com.example.presentation.request.PostEmployeeRequest;
+import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,5 +17,7 @@ public interface EmployeeService {
   PostEmployeeRequest insertByEmployeeOfService(PostEmployeeRequest postEmployeeRequest);
 
   void deleteByEmployeeOfService(String id);
+
+  void updateByEmployeeOfService(String id, UpdateEmployeeRequest updateEmployeeRequest);
 
 }

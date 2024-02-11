@@ -5,6 +5,7 @@ import com.example.domain.repository.EmployeeRepository;
 import com.example.domain.service.EmployeeService;
 import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
+import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -45,4 +46,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
     employeeRepository.deleteByEmployeeOfRepository(id);
   }
+
+  @Override
+  @Transactional
+  public void updateByEmployeeOfService(String id, UpdateEmployeeRequest updateEmployeeRequest) {
+    if ((employeeRepository.findByEmployeeOfRepository(id).isEmpty())) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
+    employeeRepository.updateByEmployeeOfRepository(id, updateEmployeeRequest);
+  }
+
 }
