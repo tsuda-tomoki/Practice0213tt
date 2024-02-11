@@ -3,6 +3,7 @@ package com.example.domain.service;
 import com.example.domain.entity.Employee;
 import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * サービスクラスのインターフェイス.
@@ -10,7 +11,7 @@ import java.util.List;
 public interface EmployeeService {
   List<Employee> findByAllEmployeesOfService();
 
-  Employee findByEmployeeIdOfService(String id);
+  Optional<Employee> findByEmployeeIdOfService(String id);
 
   PostEmployeeRequest insertByEmployeeOfService(PostEmployeeRequest postEmployeeRequest);
 

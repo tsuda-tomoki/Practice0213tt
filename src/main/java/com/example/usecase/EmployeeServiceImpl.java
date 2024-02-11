@@ -3,8 +3,10 @@ package com.example.usecase;
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
 import com.example.domain.service.EmployeeService;
+import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   @Transactional(readOnly = true)
-  public Employee findByEmployeeIdOfService(String id) {
+  public Optional<Employee> findByEmployeeIdOfService(String id) {
     return employeeRepository.findByEmployeeOfRepository(id);
   }
 
@@ -38,7 +40,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   @Transactional
   public void deleteByEmployeeOfService(String id) {
+    if ((employeeRepository.findByEmployeeOfRepository(id).isEmpty())) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
     employeeRepository.deleteByEmployeeOfRepository(id);
   }
-
 }

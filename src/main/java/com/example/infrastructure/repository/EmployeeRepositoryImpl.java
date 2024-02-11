@@ -3,8 +3,10 @@ package com.example.infrastructure.repository;
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
 import com.example.infrastructure.mapper.EmployeeMapper;
+import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +25,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   }
 
   @Override
-  public Employee findByEmployeeOfRepository(String id) {
-    return employeeMapper.findById(id);
+  public Optional<Employee> findByEmployeeOfRepository(String id) {
+    return Optional.ofNullable(employeeMapper.findById(id));
   }
 
   @Override

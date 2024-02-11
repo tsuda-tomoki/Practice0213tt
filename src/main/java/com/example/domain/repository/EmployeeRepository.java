@@ -3,6 +3,7 @@ package com.example.domain.repository;
 import com.example.domain.entity.Employee;
 import com.example.presentation.request.PostEmployeeRequest;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * employees テーブルにアクセスするためのリポジトリ.
@@ -10,7 +11,7 @@ import java.util.List;
 public interface EmployeeRepository {
   List<Employee> findByAllEmployeesOfRepository();
 
-  Employee findByEmployeeOfRepository(String id);
+  Optional<Employee> findByEmployeeOfRepository(String id);
 
   PostEmployeeRequest insertByEmployeeOfRepositroy(PostEmployeeRequest postEmployeeRequest);
 
