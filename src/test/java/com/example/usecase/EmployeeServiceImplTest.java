@@ -1,9 +1,8 @@
 package com.example.usecase;
 
 import com.example.domain.entity.Employee;
-import com.example.domain.repository.EmployeeRepository;
+import com.example.infrastructure.mapper.EmployeeMapper;
 import com.example.presentation.request.UpdateEmployeeRequest;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 class EmployeeServiceImplTest {
   @Mock
-  private EmployeeRepository employeeRepository;
+  EmployeeMapper employeeMapper;
 
   @InjectMocks
   private EmployeeServiceImpl employeeService;
@@ -36,7 +35,7 @@ class EmployeeServiceImplTest {
         new Employee("2", "Jiro", "Yamada")
     );
 
-    when(employeeRepository.findByAllEmployeesOfRepository()).thenReturn(expected);
+    when(employeeMapper.findAll()).thenReturn(expected);
 
     // execute
     List<Employee> actual = employeeService.findByAllEmployeesOfService();
@@ -48,12 +47,12 @@ class EmployeeServiceImplTest {
   @Test
   void ID検索ができる場合() {
     // setup
-    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
+    Employee expected = new Employee("1", "Taro", "Yamada");
 
-    when(employeeRepository.findByEmployeeOfRepository("1")).thenReturn(expected);
+    when(employeeMapper.findById(expected.id())).thenReturn(expected);
 
     // execute
-    Optional<Employee> actual = employeeService.findByEmployeeIdOfService("1");
+    Employee actual = employeeService.findByEmployeeIdOfService("1");
 
     // assert
     assertThat(actual).isEqualTo(expected);
@@ -76,9 +75,9 @@ class EmployeeServiceImplTest {
   @Test
   void 削除ができる場合() {
     // setup
-    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
+    Employee expected = new Employee("1", "Taro", "Yamada");
 
-    doReturn(expected).when(employeeRepository).findByEmployeeOfRepository("1");
+    doReturn(expected).when(employeeMapper).findById("1");
 
     // execute & assert
     assertThatCode(() -> employeeService.deleteByEmployeeOfService("1"))
@@ -90,9 +89,9 @@ class EmployeeServiceImplTest {
     // setup
     UpdateEmployeeRequest expected = new UpdateEmployeeRequest("Taro", "Yama");
 
-    Optional<Employee> employee = Optional.of(new Employee("1", "Taro", "Yamada"));
+    Employee employee = new Employee("1", "Taro", "Yamada");
 
-    doReturn(employee).when(employeeRepository).findByEmployeeOfRepository("1");
+    doReturn(employee).when(employeeMapper).findById("1");
 
     // execute & assert
     assertThatCode(() -> employeeService.updateByEmployeeOfService("1", expected))

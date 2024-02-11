@@ -13,7 +13,6 @@ import com.example.domain.service.EmployeeService;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -62,7 +61,7 @@ class EmployeeControllerTest {
   @Test
   void GETでエンドポイントにIDが指定された場合ID検索が実行される() throws Exception {
     // setup
-    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
+    Employee expected = new Employee("1", "Taro", "Yamada");
 
     doReturn(expected).when(employeeService).findByEmployeeIdOfService("1");
 
@@ -75,7 +74,7 @@ class EmployeeControllerTest {
   void POSTでエンドポイントにemployeesが指定された場合追加が実行される() throws Exception {
     // setup
     PostEmployeeRequest expected = new PostEmployeeRequest("3", "Hanako", "Shirato");
-    doReturn(expected).when(employeeService).insertByEmployeeOfService(expected);
+    doNothing().when(employeeService).insertByEmployeeOfService(expected);
 
     mockMvc.perform(post("/v1/employees")
             .content(readFrom("test-json/postEmployee.json"))

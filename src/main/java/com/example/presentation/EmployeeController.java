@@ -42,7 +42,7 @@ public class EmployeeController {
 
   @GetMapping("/v1/employees/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Optional<Employee> findByEmployeeId(@PathVariable String id) {
+  public Employee findByEmployeeId(@PathVariable String id) {
     return employeeService.findByEmployeeIdOfService(id);
   }
 

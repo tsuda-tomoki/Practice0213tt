@@ -1,13 +1,12 @@
 package com.example.usecase;
 
 import com.example.domain.entity.Employee;
-import com.example.domain.repository.EmployeeRepository;
 import com.example.domain.service.EmployeeService;
+import com.example.infrastructure.mapper.EmployeeMapper;
 import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
-import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,42 +17,46 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
-  private EmployeeRepository employeeRepository;
+  private EmployeeMapper employeeMapper;
 
   @Override
   @Transactional(readOnly = true)
   public List<Employee> findByAllEmployeesOfService() {
-    return employeeRepository.findByAllEmployeesOfRepository();
+    return employeeMapper.findAll();
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Optional<Employee> findByEmployeeIdOfService(String id) {
-    return employeeRepository.findByEmployeeOfRepository(id);
+  public Employee findByEmployeeIdOfService(String id) {
+    if (employeeMapper.findById(id) == null) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
+    return employeeMapper.findById(id);
   }
 
   @Override
   @Transactional
-  public PostEmployeeRequest insertByEmployeeOfService(PostEmployeeRequest postEmployeeRequest) {
-    return employeeRepository.insertByEmployeeOfRepositroy(postEmployeeRequest);
+  public void insertByEmployeeOfService(PostEmployeeRequest postEmployeeRequest) {
+    employeeMapper.insert(postEmployeeRequest);
   }
 
   @Override
   @Transactional
   public void deleteByEmployeeOfService(String id) {
-    if ((employeeRepository.findByEmployeeOfRepository(id).isEmpty())) {
+    Integer count = employeeMapper.delete(id);
+    if (count == 0) {
       throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
     }
-    employeeRepository.deleteByEmployeeOfRepository(id);
+    employeeMapper.delete(id);
   }
 
   @Override
   @Transactional
   public void updateByEmployeeOfService(String id, UpdateEmployeeRequest updateEmployeeRequest) {
-    if ((employeeRepository.findByEmployeeOfRepository(id).isEmpty())) {
+    Integer count = employeeMapper.update(id, updateEmployeeRequest);
+    if (count == 0) {
       throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
     }
-    employeeRepository.updateByEmployeeOfRepository(id, updateEmployeeRequest);
+    employeeMapper.update(id, updateEmployeeRequest);
   }
-
 }

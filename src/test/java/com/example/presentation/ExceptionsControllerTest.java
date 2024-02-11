@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.domain.repository.EmployeeRepository;
 import com.example.domain.service.EmployeeService;
 import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.UpdateEmployeeRequest;
