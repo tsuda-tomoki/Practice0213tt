@@ -118,6 +118,12 @@
       <version>${commons-collections4.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${org-postgresql.version}</version>
+    </dependency>
+
     <!-- ============================ -->
     <!-- Test Scoped Dependencies     -->
     <!-- ============================ -->
@@ -278,28 +284,6 @@
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.3.0</version>
       </plugin>
-<!--      <plugin>-->
-<!--        <groupId>org.flywaydb</groupId>-->
-<!--        <artifactId>flyway-maven-plugin</artifactId>-->
-<!--        <version>${flywaydb.version}</version>-->
-<!--        <configuration>-->
-<!--          <url>jdbc:postgresql://localhost:5432/sample</url>-->
-<!--          <user>user</user>-->
-<!--          <password>password</password>-->
-<!--          <locations>-->
-<!--            <location>filesystem:./src/main/resources/db/migration</location>-->
-<!--          </locations>-->
-<!--        </configuration>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <id>test</id>-->
-<!--            <phase>test</phase>-->
-<!--            <goals>-->
-<!--              <goal>migrate</goal>-->
-<!--            </goals>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
     </plugins>
   </build>
 </project>
