@@ -5,6 +5,7 @@ import com.example.domain.repository.EmployeeRepository;
 import com.example.infrastructure.mapper.EmployeeMapper;
 import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
+import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -38,4 +39,10 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   public void deleteByEmployeeOfRepository(String id) {
     employeeMapper.delete(id);
   }
+
+  @Override
+  public void updateByEmployeeOfRepository(String id, UpdateEmployeeRequest updateEmployeeRequest) {
+    employeeMapper.update(id, updateEmployeeRequest);
+  }
+
 }

@@ -2,6 +2,7 @@ package com.example.domain.repository;
 
 import com.example.domain.entity.Employee;
 import com.example.presentation.request.PostEmployeeRequest;
+import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,6 @@ public interface EmployeeRepository {
   PostEmployeeRequest insertByEmployeeOfRepositroy(PostEmployeeRequest postEmployeeRequest);
 
   void deleteByEmployeeOfRepository(String id);
+
+  void updateByEmployeeOfRepository(String id, UpdateEmployeeRequest updateEmployeeRequest);
 }
