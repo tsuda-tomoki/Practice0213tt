@@ -2,6 +2,7 @@ package com.example.usecase;
 
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -46,12 +47,12 @@ class EmployeeServiceImplTest {
   @Test
   void ID検索ができる場合() {
     // setup
-    Employee expected = new Employee("1", "Taro", "Yamada");
+    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
 
-    when(employeeRepository.findByEmployeeOfRepository(expected.id())).thenReturn(expected);
+    when(employeeRepository.findByEmployeeOfRepository("1")).thenReturn(expected);
 
     // execute
-    Employee actual = employeeService.findByEmployeeIdOfService("1");
+    Optional<Employee> actual = employeeService.findByEmployeeIdOfService("1");
 
     // assert
     assertThat(actual).isEqualTo(expected);

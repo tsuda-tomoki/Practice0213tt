@@ -3,6 +3,7 @@ package com.example.infrastructure;
 import com.example.domain.entity.Employee;
 import com.example.infrastructure.mapper.EmployeeMapper;
 import com.example.infrastructure.repository.EmployeeRepositoryImpl;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -48,12 +49,14 @@ class EmployeeRepositoryImplTest {
   @Test
   void ID検索ができる場合() {
     // setup
-    Employee expected = new Employee("1", "Taro", "Yamada");
+    Employee employee = new Employee("1", "Taro", "Yamada");
 
-    when(employeeMapper.findById(expected.id())).thenReturn(expected);
+    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
+
+    when(employeeMapper.findById(employee.id())).thenReturn(employee);
 
     // execute
-    Employee actual = employeeRepository.findByEmployeeOfRepository("1");
+    Optional<Employee> actual = employeeRepository.findByEmployeeOfRepository("1");
 
     // assert
     assertThat(actual).isEqualTo(expected);
