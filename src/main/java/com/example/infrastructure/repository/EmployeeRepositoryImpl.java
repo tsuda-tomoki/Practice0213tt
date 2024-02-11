@@ -31,4 +31,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   public PostEmployeeRequest insertByEmployeeOfRepositroy(PostEmployeeRequest postEmployeeRequest) {
     return postEmployeeRequest;
   }
+
+  @Override
+  public void deleteByEmployeeOfRepository(String id) {
+    employeeMapper.delete(id);
+  }
 }

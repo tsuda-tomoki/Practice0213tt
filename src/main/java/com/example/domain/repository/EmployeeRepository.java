@@ -13,4 +13,6 @@ public interface EmployeeRepository {
   Employee findByEmployeeOfRepository(String id);
 
   PostEmployeeRequest insertByEmployeeOfRepositroy(PostEmployeeRequest postEmployeeRequest);
+
+  void deleteByEmployeeOfRepository(String id);
 }
