@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 class EmployeeRepositoryImplTest {
@@ -71,4 +72,14 @@ class EmployeeRepositoryImplTest {
 //    // assert
 //    assertThat(actual).isEqualTo(expected);
 //  }
+
+  @Test
+  void 削除ができる場合() {
+    // setup
+    when(employeeMapper.delete("1")).thenReturn(1);
+
+    // execute
+    assertThatCode(() -> employeeRepository.deleteByEmployeeOfRepository("1"))
+        .doesNotThrowAnyException();
+  }
 }
