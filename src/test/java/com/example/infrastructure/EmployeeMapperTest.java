@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.example.domain.entity.Employee;
 import com.example.infrastructure.mapper.EmployeeMapper;
 import com.example.presentation.request.PostEmployeeRequest;
+import com.example.presentation.request.UpdateEmployeeRequest;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.connection.ConnectionHolder;
 import com.github.database.rider.core.api.dataset.DataSet;
@@ -92,5 +93,19 @@ class EmployeeMapperTest {
     // assert
     assertThat(actual).isEqualTo(1);
   }
+
+  @Test
+  @DataSet(value = "test-yml/one-Employee.yml")
+  @ExpectedDataSet(value = "test-yml/another-one-Employee.yml")
+  void 更新ができる場合() throws Exception {
+    // setup
+    UpdateEmployeeRequest updateEmployeeRequest = new UpdateEmployeeRequest("Taro", "Yama");
+    // execute
+    Integer actual = sut.update("1", updateEmployeeRequest);
+
+    // assert
+    assertThat(actual).isEqualTo(1);
+  }
+
 
 }
