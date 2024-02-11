@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 class EmployeeServiceImplTest {
@@ -69,4 +70,16 @@ class EmployeeServiceImplTest {
 //    // assert
 //    assertThat(actual).isEqualTo(expected);
 //  }
+
+  @Test
+  void 削除ができる場合() {
+    // setup
+    Employee expected = new Employee("1", "Taro", "Yamada");
+
+    doReturn(expected).when(employeeRepository).findByEmployeeOfRepository("1");
+
+    // execute & assert
+    assertThatCode(() -> employeeService.deleteByEmployeeOfService("1"))
+        .doesNotThrowAnyException();
+  }
 }
