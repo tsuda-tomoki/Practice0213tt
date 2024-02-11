@@ -35,4 +35,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     return employeeRepository.insertByEmployeeOfRepositroy(postEmployeeRequest);
   }
 
+  @Override
+  @Transactional
+  public void deleteByEmployeeOfService(String id) {
+    employeeRepository.deleteByEmployeeOfRepository(id);
+  }
+
 }

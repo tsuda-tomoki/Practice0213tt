@@ -14,4 +14,6 @@ public interface EmployeeService {
 
   PostEmployeeRequest insertByEmployeeOfService(PostEmployeeRequest postEmployeeRequest);
 
+  void deleteByEmployeeOfService(String id);
+
 }
