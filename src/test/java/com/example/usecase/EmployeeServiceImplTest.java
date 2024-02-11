@@ -2,6 +2,7 @@ package com.example.usecase;
 
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
+import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,12 +76,26 @@ class EmployeeServiceImplTest {
   @Test
   void 削除ができる場合() {
     // setup
-    Employee expected = new Employee("1", "Taro", "Yamada");
+    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
 
     doReturn(expected).when(employeeRepository).findByEmployeeOfRepository("1");
 
     // execute & assert
     assertThatCode(() -> employeeService.deleteByEmployeeOfService("1"))
+        .doesNotThrowAnyException();
+  }
+
+  @Test
+  void 更新ができる場合() {
+    // setup
+    UpdateEmployeeRequest expected = new UpdateEmployeeRequest("Taro", "Yama");
+
+    Optional<Employee> employee = Optional.of(new Employee("1", "Taro", "Yamada"));
+
+    doReturn(employee).when(employeeRepository).findByEmployeeOfRepository("1");
+
+    // execute & assert
+    assertThatCode(() -> employeeService.updateByEmployeeOfService("1", expected))
         .doesNotThrowAnyException();
   }
 }
