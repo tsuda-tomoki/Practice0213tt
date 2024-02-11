@@ -29,6 +29,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   @Transactional(readOnly = true)
   public Optional<Employee> findByEmployeeIdOfService(String id) {
+    if ((employeeRepository.findByEmployeeOfRepository(id).isEmpty())) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
     return employeeRepository.findByEmployeeOfRepository(id);
   }
 
