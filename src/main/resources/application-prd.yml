@@ -4,3 +4,4 @@ spring:
     url: ${EMPLOYEE_DB_URL}
     username: ${EMPLOYEE_DB_USER}
     password: ${EMPLOYEE_DB_PASS_WORD}
+    driver-class-name: org.postgresql.Driver
