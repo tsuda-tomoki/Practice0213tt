@@ -1,7 +1,9 @@
 package com.example.presentation;
 
 import static com.example.TestUtils.readFrom;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -76,4 +78,15 @@ class EmployeeControllerTest {
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isCreated());
   }
+
+  @Test
+  void DELETEでエンドポイントにidが指定されたときそれを削除する() throws Exception {
+    // setup
+    doNothing().when(employeeService).deleteByEmployeeOfService("1");
+
+    // assert
+    mockMvc.perform(delete("/v1/employees/1")
+    ).andExpect(status().isNoContent());
+  }
+
 }
