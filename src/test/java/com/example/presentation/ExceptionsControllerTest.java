@@ -3,12 +3,14 @@ package com.example.presentation;
 import static com.example.TestUtils.readFrom;
 import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.domain.repository.EmployeeRepository;
 import com.example.domain.service.EmployeeService;
 import com.example.presentation.exception.EmployeesNotFoundException;
+import com.example.presentation.request.UpdateEmployeeRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -51,6 +53,20 @@ class ExceptionsControllerTest {
 
     // assert
     mockMvc.perform(delete("/v1/employees/999")
+    ).andExpect(status().isBadRequest());
+  }
+
+  @Test
+  void PATCHでエンドポイントに不正なidが指定されたとき400エラー() throws Exception {
+    // setup
+    UpdateEmployeeRequest expected = new UpdateEmployeeRequest("Taro", "Yama");
+
+    doThrow(new EmployeesNotFoundException("999"))
+        .when(employeeService)
+        .updateByEmployeeOfService("999", expected);
+
+    // assert
+    mockMvc.perform(patch("/v1/employees/999")
     ).andExpect(status().isBadRequest());
   }
 }
