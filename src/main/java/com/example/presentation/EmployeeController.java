@@ -60,7 +60,7 @@ public class EmployeeController {
    */
   @GetMapping("/v1/employees/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Employee findByEmployeeId(@PathVariable String id) {
+  public Optional<Employee> findByEmployeeId(@PathVariable String id) {
     return employeeService.findByEmployeeIdOfService(id);
   }
 

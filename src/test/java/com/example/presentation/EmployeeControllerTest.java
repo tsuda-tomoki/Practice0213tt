@@ -70,7 +70,7 @@ class EmployeeControllerTest {
   @Test
   void GETでエンドポイントにIDが指定された場合ID検索が実行される() throws Exception {
     // setup
-    Employee expected =new Employee("1", "Taro", "Yamada");
+    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
 
     doReturn(expected).when(employeeService).findByEmployeeIdOfService("1");
 

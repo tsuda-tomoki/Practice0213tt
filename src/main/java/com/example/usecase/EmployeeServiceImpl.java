@@ -28,7 +28,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   @Transactional(readOnly = true)
-  public Employee findByEmployeeIdOfService(String id) {
+  public Optional<Employee> findByEmployeeIdOfService(String id) {
+    if ((employeeRepository.findByEmployeeOfRepository(id).isEmpty())) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
     return employeeRepository.findByEmployeeOfRepository(id);
   }
 
@@ -41,12 +44,18 @@ public class EmployeeServiceImpl implements EmployeeService {
   @Override
   @Transactional
   public void deleteByEmployeeOfService(String id) {
+    if ((employeeRepository.findByEmployeeOfRepository(id).isEmpty())) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
     employeeRepository.deleteByEmployeeOfRepository(id);
   }
 
   @Override
   @Transactional
   public void updateByEmployeeOfService(String id, UpdateEmployeeRequest updateEmployeeRequest) {
+    if ((employeeRepository.findByEmployeeOfRepository(id).isEmpty())) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
     employeeRepository.updateByEmployeeOfRepository(id, updateEmployeeRequest);
   }
 }

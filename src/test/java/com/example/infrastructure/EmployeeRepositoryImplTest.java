@@ -52,12 +52,12 @@ class EmployeeRepositoryImplTest {
     // setup
     Employee employee = new Employee("1", "Taro", "Yamada");
 
-    Employee expected = new Employee("1", "Taro", "Yamada");
+    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
 
     when(employeeMapper.findById(employee.id())).thenReturn(employee);
 
     // execute
-    Employee actual = employeeRepository.findByEmployeeOfRepository("1");
+    Optional<Employee> actual = employeeRepository.findByEmployeeOfRepository("1");
 
     // assert
     assertThat(actual).isEqualTo(expected);

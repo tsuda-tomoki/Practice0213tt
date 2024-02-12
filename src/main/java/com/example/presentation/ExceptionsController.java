@@ -15,11 +15,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * コントローラークラスの例外ハンドリングクラス.
+ * コントローラークラスの例外ハンドリングを行うクラスです.
  */
 @RestControllerAdvice
 public class ExceptionsController {
 
+  /**
+   * メソッド引数が無効な場合の例外ハンドリングを行います.
+   *
+   * @param methodArgumentNotValidException 発生したMethodArgumentNotValidException
+   * @return 例外レスポンス
+   */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionResponse handleError(
@@ -28,6 +34,12 @@ public class ExceptionsController {
     return new ExceptionResponse("0002", "request validation error is occurred.", detailsList);
   }
 
+  /**
+   * 従業員が見つからない場合の例外ハンドリングを行います.
+   *
+   * @param e 発生したEmployeesNotFoundException
+   * @return 例外レスポンス
+   */
   @ExceptionHandler(EmployeesNotFoundException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {

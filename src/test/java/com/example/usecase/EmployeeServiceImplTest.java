@@ -52,12 +52,12 @@ class EmployeeServiceImplTest {
   @Test
   void ID検索ができる場合() {
     // setup
-    Employee expected = new Employee("1", "Taro", "Yamada");
+    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
 
     when(employeeRepository.findByEmployeeOfRepository("1")).thenReturn(expected);
 
     // execute
-    Employee actual = employeeService.findByEmployeeIdOfService("1");
+    Optional<Employee> actual = employeeService.findByEmployeeIdOfService("1");
 
     // assert
     assertThat(actual).isEqualTo(expected);
@@ -71,7 +71,7 @@ class EmployeeServiceImplTest {
     postEmployeeRequest.setFirstName("Hanako");
     postEmployeeRequest.setLastName("Shirato");
 
-    Employee employee = new Employee("3", "Hanako", "Shirato");
+    Optional<Employee> employee = Optional.of(new Employee("3", "Hanako", "Shirato"));
 
 
     doReturn(employee).when(employeeRepository).findByEmployeeOfRepository("3");
@@ -84,7 +84,7 @@ class EmployeeServiceImplTest {
   @Test
   void 削除ができる場合() {
     // setup
-    Employee employee = new Employee("1", "Taro", "Yamada");
+    Optional<Employee> employee = Optional.of(new Employee("1", "Taro", "Yamada"));
 
     doReturn(employee).when(employeeRepository).findByEmployeeOfRepository("1");
 
@@ -98,7 +98,7 @@ class EmployeeServiceImplTest {
     // setup
     UpdateEmployeeRequest expected = new UpdateEmployeeRequest("Taro", "Yama");
 
-    Employee employee = new Employee("1", "Taro", "Yamada");
+    Optional<Employee> employee = Optional.of(new Employee("1", "Taro", "Yamada"));
 
     doReturn(employee).when(employeeRepository).findByEmployeeOfRepository("1");
 
