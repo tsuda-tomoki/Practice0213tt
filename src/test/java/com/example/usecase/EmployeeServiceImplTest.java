@@ -3,6 +3,7 @@ package com.example.usecase;
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
 import com.example.infrastructure.mapper.EmployeeMapper;
+import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import it.unibo.tuprolog.solve.stdlib.primitive.Op;
 import java.util.Optional;
@@ -62,19 +63,23 @@ class EmployeeServiceImplTest {
     assertThat(actual).isEqualTo(expected);
   }
 
-//  @Test
-//  void 追加ができる場合() {
-//    // setup
-//    Employee expected = new Employee("3", "Hanako", "Shirato");
-//
-//    when(employeeRepository.insertByEmployeeOfRepositroy(expected)).thenReturn(expected);
-//
-//    // execute
-//    Employee actual = employeeService.insertByEmployeeOfService(expected);
-//
-//    // assert
-//    assertThat(actual).isEqualTo(expected);
-//  }
+  @Test
+  void 追加ができる場合() {
+    // setup
+    PostEmployeeRequest postEmployeeRequest = new PostEmployeeRequest();
+    postEmployeeRequest.setId("3");
+    postEmployeeRequest.setFirstName("Hanako");
+    postEmployeeRequest.setLastName("Shirato");
+
+    Optional<Employee> employee = Optional.of(new Employee("3", "Hanako", "Shirato"));
+
+
+    doReturn(employee).when(employeeRepository).findByEmployeeOfRepository("3");
+
+    // execute & assert
+    assertThatCode(() -> employeeService.insertByEmployeeOfService(postEmployeeRequest))
+        .doesNotThrowAnyException();
+  }
 
   @Test
   void 削除ができる場合() {

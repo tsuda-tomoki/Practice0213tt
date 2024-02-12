@@ -3,16 +3,34 @@ package com.example.presentation.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 
-public record PostEmployeeRequest(
-    @NotBlank
-    @JsonProperty("firstName")
-    String firstName,
+public class PostEmployeeRequest {
+  @NotBlank
+  String firstName;
+  @NotBlank
+  String lastName;
+  String id;
 
-    @NotBlank
-    @JsonProperty("lastName")
-    String lastName,
+  public String getFirstName() {
+    return firstName;
+  }
 
-    String id
-) {
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 }

@@ -3,6 +3,7 @@ package com.example.infrastructure;
 import com.example.domain.entity.Employee;
 import com.example.infrastructure.mapper.EmployeeMapper;
 import com.example.infrastructure.repository.EmployeeRepositoryImpl;
+import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,19 +63,20 @@ class EmployeeRepositoryImplTest {
     assertThat(actual).isEqualTo(expected);
   }
 
-//  @Test
-//  void 追加ができる場合() {
-//    // setup
-//    Employee expected = new Employee("3", "Hanako", "Shirato");
-//
-//    when(employeeMapper.insert(expected)).thenReturn(1);
-//
-//    // execute
-//    Employee actual = employeeRepository.insertByEmployeeOfRepositroy(expected);
-//
-//    // assert
-//    assertThat(actual).isEqualTo(expected);
-//  }
+  @Test
+  void 追加ができる場合() {
+    // setup
+    PostEmployeeRequest postEmployeeRequest = new PostEmployeeRequest();
+    postEmployeeRequest.setId("3");
+    postEmployeeRequest.setFirstName("Hanako");
+    postEmployeeRequest.setLastName("Shirato");
+
+    when(employeeMapper.insert(postEmployeeRequest)).thenReturn(1);
+
+    // execute & assert
+        assertThatCode(() -> employeeRepository.insertByEmployeeOfRepositroy(postEmployeeRequest))
+            .doesNotThrowAnyException();
+  }
 
   @Test
   void 削除ができる場合() {

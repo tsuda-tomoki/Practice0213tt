@@ -69,19 +69,22 @@ class EmployeeMapperTest {
     assertThat(actual).isEqualTo(expected);
   }
 
-//  @Test
-//  @DataSet(value = "test-yml/two-Employees.yml")
-//  @ExpectedDataSet(value = "test-yml/three-Employees.yml")
-//  void 追加ができる場合() throws Exception {
-//    // setup
-//    PostEmployeeRequest postEmployeeRequest = new PostEmployeeRequest("Hanako", "Shirato");
-//
-//    // execute
-//    sut.insert(postEmployeeRequest);
-//
-//    // assert
-//    assertThat(actual).isEqualTo(1);
-//  }
+  @Test
+  @DataSet(value = "test-yml/two-Employees.yml")
+  @ExpectedDataSet(value = "test-yml/three-Employees.yml")
+  void 追加ができる場合() throws Exception {
+    // setup
+    PostEmployeeRequest postEmployeeRequest = new PostEmployeeRequest();
+    postEmployeeRequest.setId("3");
+    postEmployeeRequest.setFirstName("Hanako");
+    postEmployeeRequest.setLastName("Shirato");
+
+    // execute
+    Integer actual = sut.insert(postEmployeeRequest);
+
+    // assert
+    assertThat(actual).isEqualTo(1);
+  }
 
   @Test
   @DataSet(value = "test-yml/two-Employees.yml")

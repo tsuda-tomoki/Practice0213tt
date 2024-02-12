@@ -25,8 +25,8 @@ public interface EmployeeMapper {
   Employee findById(String id);
 
   @Insert("INSERT INTO employees (id, first_name, last_name) VALUES (nextval('EMPLOYEE_ID_SEQ'), #{firstName}, #{lastName})")
-  @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "record.id")
-  void insert(PostEmployeeRequest postEmployeeRequest);
+  @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
+  Integer insert(PostEmployeeRequest postEmployeeRequest);
 
   @Delete("DELETE FROM employees WHERE id = #{id}")
   Integer delete(String id);

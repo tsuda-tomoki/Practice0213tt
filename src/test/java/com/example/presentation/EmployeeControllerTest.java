@@ -74,7 +74,11 @@ class EmployeeControllerTest {
   @Test
   void POSTでエンドポイントにemployeesが指定された場合追加が実行される() throws Exception {
     // setup
-    PostEmployeeRequest expected = new PostEmployeeRequest("3", "Hanako", "Shirato");
+    PostEmployeeRequest expected = new PostEmployeeRequest();
+    expected.setId("3");
+    expected.setFirstName("Hanako");
+    expected.setLastName("Shirato");
+
     doNothing().when(employeeService).insertByEmployeeOfService(expected);
 
     mockMvc.perform(post("/v1/employees")

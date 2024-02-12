@@ -52,7 +52,7 @@ public class EmployeeController {
     employeeService.insertByEmployeeOfService(postEmployeeRequest);
     URI location =
         ServletUriComponentsBuilder.fromCurrentRequest()
-            .pathSegment(postEmployeeRequest.id())
+            .pathSegment(postEmployeeRequest.getId())
             .build().encode().toUri();
     return ResponseEntity.created(location).build();
   }
