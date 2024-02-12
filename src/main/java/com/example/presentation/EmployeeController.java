@@ -2,20 +2,16 @@ package com.example.presentation;
 
 import com.example.domain.entity.Employee;
 import com.example.domain.service.EmployeeService;
-import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import com.example.presentation.response.AllEmployeesResponse;
-import com.example.presentation.response.ExceptionHandResponse;
 import java.net.URI;
-import java.util.Collections;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +29,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class EmployeeController {
 
   private EmployeeService employeeService;
+
+  @GetMapping("/")
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEntity<String> handleRootRequest() {
+    return ResponseEntity.ok("Success! You've accessed the root URL of /v1/employees.");
+  }
 
   @GetMapping("/v1/employees")
   @ResponseStatus(HttpStatus.OK)
