@@ -37,7 +37,7 @@ public class ExceptionsController {
         ), HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler
+  @ExceptionHandler(EmployeesNotFoundException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {
     String message = e.getMessage();
