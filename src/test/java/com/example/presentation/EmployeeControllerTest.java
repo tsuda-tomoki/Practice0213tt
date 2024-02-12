@@ -13,6 +13,7 @@ import com.example.domain.service.EmployeeService;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -61,7 +62,7 @@ class EmployeeControllerTest {
   @Test
   void GETでエンドポイントにIDが指定された場合ID検索が実行される() throws Exception {
     // setup
-    Employee expected = new Employee("1", "Taro", "Yamada");
+    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
 
     doReturn(expected).when(employeeService).findByEmployeeIdOfService("1");
 

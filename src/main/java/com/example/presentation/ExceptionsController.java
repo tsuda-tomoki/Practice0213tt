@@ -11,14 +11,16 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * コントローラークラスの例外ハンドリングクラス.
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionsController {
 
-  @ExceptionHandler
+  @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionResponse handleError(
       MethodArgumentNotValidException methodArgumentNotValidException) {
@@ -26,7 +28,7 @@ public class ExceptionsController {
     return new ExceptionResponse("0002", "request validation error is occurred.", detailsList);
   }
 
-  @ExceptionHandler
+  @ExceptionHandler(EmployeesNotFoundException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {
     String message = e.getMessage();
