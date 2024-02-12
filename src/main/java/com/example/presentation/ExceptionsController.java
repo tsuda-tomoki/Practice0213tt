@@ -7,6 +7,8 @@ import com.example.presentation.response.ExceptionResponse;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,7 +28,16 @@ public class ExceptionsController {
     return new ExceptionResponse("0002", "request validation error is occurred.", detailsList);
   }
 
-  @ExceptionHandler(EmployeesNotFoundException.class)
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  public ResponseEntity<ExceptionHandResponse> getException() {
+    List<Details> detailsList = List.of(new Details("firstName must not be blank"));
+    return new ResponseEntity<ExceptionHandResponse>(
+        new ExceptionHandResponse(
+            "0002", "request validation error is occurred.", detailsList
+        ), HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {
     String message = e.getMessage();
