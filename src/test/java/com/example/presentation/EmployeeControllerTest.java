@@ -45,6 +45,14 @@ class EmployeeControllerTest {
   }
 
   @Test
+  void GETでエンドポイントに何もが指定されていない場合() throws Exception {
+    // assert
+    mockMvc.perform(get("/"))
+        .andExpect(status().isOk())
+        .andExpect(content().string("Success! You've accessed the root URL of /v1/employees."));
+  }
+
+  @Test
   void GETでエンドポイントにemployeesが指定された場合全件検索が実行される() throws Exception {
     // setup
     List<Employee> expected = List.of(
