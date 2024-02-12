@@ -16,6 +16,7 @@ import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -112,25 +113,21 @@ public class EmployeeController {
     employeeService.updateByEmployeeOfService(id, updateEmployeeRequest);
   }
 
-  /**
-   * メソッド引数が無効な場合の例外ハンドリングを行います.
-   *
-   * @param methodArgumentNotValidException 発生したMethodArgumentNotValidException
-   * @return 例外レスポンス
-   */
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ExceptionResponse handleError(
-      MethodArgumentNotValidException methodArgumentNotValidException) {
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  public ResponseEntity<ExceptionHandResponse> getException() {
     List<Details> detailsList = List.of(new Details("firstName must not be blank"));
-    return new ExceptionResponse("0002", "request validation error is occurred.", detailsList);
+    return new ResponseEntity<ExceptionHandResponse>(
+        new ExceptionHandResponse(
+            "0002", "request validation error is occurred.", detailsList
+        ), HttpStatus.BAD_REQUEST);
   }
-
   /**
    * 従業員が見つからない場合の例外ハンドリングを行います.
    *
    * @param e 発生したEmployeesNotFoundException
    * @return 例外レスポンス
    */
+  @ExceptionHandler
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {
     String message = e.getMessage();
