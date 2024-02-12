@@ -112,25 +112,4 @@ public class EmployeeController {
   public void updateByEmployee(@PathVariable String id, @RequestBody @Validated UpdateEmployeeRequest updateEmployeeRequest) {
     employeeService.updateByEmployeeOfService(id, updateEmployeeRequest);
   }
-
-  @ExceptionHandler(HttpMessageNotReadableException.class)
-  public ResponseEntity<ExceptionHandResponse> getException() {
-    List<Details> detailsList = List.of(new Details("firstName must not be blank"));
-    return new ResponseEntity<ExceptionHandResponse>(
-        new ExceptionHandResponse(
-            "0002", "request validation error is occurred.", detailsList
-        ), HttpStatus.BAD_REQUEST);
-  }
-  /**
-   * 従業員が見つからない場合の例外ハンドリングを行います.
-   *
-   * @param e 発生したEmployeesNotFoundException
-   * @return 例外レスポンス
-   */
-  @ExceptionHandler
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {
-    String message = e.getMessage();
-    return new ExceptionHandResponse("0003", message, Collections.emptyList());
-  }
 }
