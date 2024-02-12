@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface EmployeeRepository {
   List<Employee> findByAllEmployeesOfRepository();
 
-  Optional<Employee> findByEmployeeOfRepository(String id);
+  Employee findByEmployeeOfRepository(String id);
 
   void insertByEmployeeOfRepositroy(PostEmployeeRequest postEmployeeRequest);
 

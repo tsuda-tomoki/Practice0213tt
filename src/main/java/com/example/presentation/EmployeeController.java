@@ -33,7 +33,7 @@ public class EmployeeController {
   /**
    * ルートURLへのリクエストを処理します.
    *
-   * @return 成功メッセージを含むResponseEntity.
+   * @return 成功メッセージを含むResponseEntity
    */
   @GetMapping("/")
   @ResponseStatus(HttpStatus.OK)
@@ -44,7 +44,7 @@ public class EmployeeController {
   /**
    * すべての従業員を返します.
    *
-   * @return すべての従業員のリストを含むAllEmployeesResponse.
+   * @return すべての従業員のリストを含むAllEmployeesResponse
    */
   @GetMapping("/v1/employees")
   @ResponseStatus(HttpStatus.OK)
@@ -55,15 +55,21 @@ public class EmployeeController {
   /**
    * 従業員をID検索して返します.
    *
-   * @param id 検索する従業員のID.
-   * @return 従業員が見つかった場合はそのOptionalのEmployee
+   * @param id 検索する従業員のID
+   * @return OptionalのEmployee
    */
   @GetMapping("/v1/employees/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Optional<Employee> findByEmployeeId(@PathVariable String id) {
+  public Employee findByEmployeeId(@PathVariable String id) {
     return employeeService.findByEmployeeIdOfService(id);
   }
 
+  /**
+   * 新しい従業員を登録します.
+   *
+   * @param postEmployeeRequest 従業員情報を含むリクエスト
+   * @return ステータスコード201 (Created) および作成されたリソースのURIを含むResponseEntity
+   */
   @PostMapping("/v1/employees")
   @ResponseStatus(HttpStatus.CREATED)
   public ResponseEntity<Employee> insertByEmployee(@RequestBody @Validated PostEmployeeRequest postEmployeeRequest) {
@@ -75,12 +81,23 @@ public class EmployeeController {
     return ResponseEntity.created(location).build();
   }
 
+  /**
+   * ID指定で従業員情報を削除します.
+   *
+   * @param id 削除する従業員のID
+   */
   @DeleteMapping("/v1/employees/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteByEmployee(@PathVariable String id) {
     employeeService.deleteByEmployeeOfService(id);
   }
 
+  /**
+   * ID指定で従業員情報を更新します.
+   *
+   * @param id 従業員のID
+   * @param updateEmployeeRequest 更新された従業員情報を含むリクエスト
+   */
   @PatchMapping("/v1/employees/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void updateByEmployee(@PathVariable String id, @RequestBody @Validated UpdateEmployeeRequest updateEmployeeRequest) {

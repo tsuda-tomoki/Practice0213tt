@@ -26,11 +26,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   }
 
   @Override
-  public Optional<Employee> findByEmployeeOfRepository(String id) {
+  public Employee findByEmployeeOfRepository(String id) {
     if (employeeMapper.findById(id) == null) {
       throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
     }
-    return Optional.ofNullable(employeeMapper.findById(id));
+    return employeeMapper.findById(id);
   }
 
   @Override
@@ -40,11 +40,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public void deleteByEmployeeOfRepository(String id) {
+    if (employeeMapper.delete(id) == null) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
     employeeMapper.delete(id);
   }
 
   @Override
   public void updateByEmployeeOfRepository(String id, UpdateEmployeeRequest updateEmployeeRequest) {
+    if (employeeMapper.update(id, updateEmployeeRequest) == null) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
     employeeMapper.update(id, updateEmployeeRequest);
   }
 }
