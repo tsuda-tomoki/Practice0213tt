@@ -1,5 +1,7 @@
 package com.example.presentation.response;
 
-public record DetailResponse(String message) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record DetailResponse(@JsonProperty("Details") String message) {
 
 }
