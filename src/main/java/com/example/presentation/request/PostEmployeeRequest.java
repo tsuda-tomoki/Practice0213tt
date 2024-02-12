@@ -10,7 +10,9 @@ public record PostEmployeeRequest(
 
     @NotBlank
     @JsonProperty("lastName")
-    String lastName
+    String lastName,
+
+    String id
 ) {
 
 }
