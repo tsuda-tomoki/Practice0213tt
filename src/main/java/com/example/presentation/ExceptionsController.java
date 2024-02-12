@@ -28,15 +28,6 @@ public class ExceptionsController {
     return new ExceptionResponse("0002", "request validation error is occurred.", detailsList);
   }
 
-  @ExceptionHandler(HttpMessageNotReadableException.class)
-  public ResponseEntity<ExceptionHandResponse> getException() {
-    List<Details> detailsList = List.of(new Details("firstName must not be blank"));
-    return new ResponseEntity<ExceptionHandResponse>(
-        new ExceptionHandResponse(
-            "0002", "request validation error is occurred.", detailsList
-        ), HttpStatus.BAD_REQUEST);
-  }
-
   @ExceptionHandler(EmployeesNotFoundException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {
