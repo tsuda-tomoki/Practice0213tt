@@ -6,6 +6,6 @@ import java.util.List;
 public record ExceptionResponse(
     @JsonProperty("code") String code,
     @JsonProperty("message") String message,
-    @JsonProperty("details") List<Details> detailsList
+    @JsonProperty("details") List<String> detailsList
 ) {
 }

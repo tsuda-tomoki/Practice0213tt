@@ -30,7 +30,7 @@ public class ExceptionsController {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ExceptionResponse handleError(
       MethodArgumentNotValidException methodArgumentNotValidException) {
-    List<Details> detailsList = List.of(new Details("firstName must not be blank"));
+    List<String> detailsList = List.of("firstName must not be blank");
     return new ExceptionResponse("0002", "request validation error is occurred.", detailsList);
   }
 
