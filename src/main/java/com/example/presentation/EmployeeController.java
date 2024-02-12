@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
- * employee のコントローラークラス.
+ * 従業員を管理するコントローラークラスです.
  */
 @RestController
 @AllArgsConstructor
@@ -30,18 +30,34 @@ public class EmployeeController {
 
   private EmployeeService employeeService;
 
+  /**
+   * ルートURLへのリクエストを処理します.
+   *
+   * @return 成功メッセージを含むResponseEntity.
+   */
   @GetMapping("/")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<String> handleRootRequest() {
     return ResponseEntity.ok("Success! You've accessed the root URL of /v1/employees.");
   }
 
+  /**
+   * すべての従業員を返します.
+   *
+   * @return すべての従業員のリストを含むAllEmployeesResponse.
+   */
   @GetMapping("/v1/employees")
   @ResponseStatus(HttpStatus.OK)
   public AllEmployeesResponse findByAllEmployees() {
     return new AllEmployeesResponse(employeeService.findByAllEmployeesOfService());
   }
 
+  /**
+   * 従業員をID検索して返します.
+   *
+   * @param id 検索する従業員のID.
+   * @return 従業員が見つかった場合はそのOptionalのEmployee
+   */
   @GetMapping("/v1/employees/{id}")
   @ResponseStatus(HttpStatus.OK)
   public Optional<Employee> findByEmployeeId(@PathVariable String id) {
