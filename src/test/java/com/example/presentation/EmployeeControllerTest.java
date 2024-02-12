@@ -3,6 +3,7 @@ package com.example.presentation;
 import static com.example.TestUtils.readFrom;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -10,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.example.domain.entity.Employee;
 import com.example.domain.service.EmployeeService;
+import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
@@ -70,7 +72,7 @@ class EmployeeControllerTest {
   @Test
   void GETでエンドポイントにIDが指定された場合ID検索が実行される() throws Exception {
     // setup
-    Optional<Employee> expected = Optional.of(new Employee("1", "Taro", "Yamada"));
+    Employee expected = new Employee("1", "Taro", "Yamada");
 
     doReturn(expected).when(employeeService).findByEmployeeIdOfService("1");
 
@@ -116,5 +118,40 @@ class EmployeeControllerTest {
             .content(readFrom("test-json/patchEmployee.json"))
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(MockMvcResultMatchers.status().isNoContent());
+  }
+
+  @Test
+  void POSTでエンドポイントにemployeesが指定され不正なJSONが来たら400エラーを出す() throws Exception {
+    // assert
+    mockMvc.perform(post("/v1/employees")
+            .content(readFrom("test-json/postEmployee-bad.json"))
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  void DELETEでエンドポイントに不正なidが指定されたとき400エラー() throws Exception {
+    // setup
+    doThrow(new EmployeesNotFoundException("999"))
+        .when(employeeService)
+        .deleteByEmployeeOfService("999");
+
+    // assert
+    mockMvc.perform(delete("/v1/employees/999")
+    ).andExpect(status().isBadRequest());
+  }
+
+  @Test
+  void PATCHでエンドポイントに不正なidが指定されたとき400エラー() throws Exception {
+    // setup
+    UpdateEmployeeRequest expected = new UpdateEmployeeRequest("Taro", "Yama");
+
+    doThrow(new EmployeesNotFoundException("999"))
+        .when(employeeService)
+        .updateByEmployeeOfService("999", expected);
+
+    // assert
+    mockMvc.perform(patch("/v1/employees/999")
+    ).andExpect(status().isBadRequest());
   }
 }

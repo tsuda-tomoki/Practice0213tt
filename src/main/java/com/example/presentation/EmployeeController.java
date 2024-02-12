@@ -2,16 +2,24 @@ package com.example.presentation;
 
 import com.example.domain.entity.Employee;
 import com.example.domain.service.EmployeeService;
+import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import com.example.presentation.response.AllEmployeesResponse;
+import com.example.presentation.response.Details;
+import com.example.presentation.response.ExceptionHandResponse;
+import com.example.presentation.response.ExceptionResponse;
 import java.net.URI;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,7 +68,7 @@ public class EmployeeController {
    */
   @GetMapping("/v1/employees/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Optional<Employee> findByEmployeeId(@PathVariable String id) {
+  public Employee findByEmployeeId(@PathVariable String id) {
     return employeeService.findByEmployeeIdOfService(id);
   }
 
@@ -102,5 +110,30 @@ public class EmployeeController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void updateByEmployee(@PathVariable String id, @RequestBody @Validated UpdateEmployeeRequest updateEmployeeRequest) {
     employeeService.updateByEmployeeOfService(id, updateEmployeeRequest);
+  }
+
+  /**
+   * メソッド引数が無効な場合の例外ハンドリングを行います.
+   *
+   * @param methodArgumentNotValidException 発生したMethodArgumentNotValidException
+   * @return 例外レスポンス
+   */
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ExceptionResponse handleError(
+      MethodArgumentNotValidException methodArgumentNotValidException) {
+    List<Details> detailsList = List.of(new Details("firstName must not be blank"));
+    return new ExceptionResponse("0002", "request validation error is occurred.", detailsList);
+  }
+
+  /**
+   * 従業員が見つからない場合の例外ハンドリングを行います.
+   *
+   * @param e 発生したEmployeesNotFoundException
+   * @return 例外レスポンス
+   */
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ExceptionHandResponse handleEmployeeNotFound(EmployeesNotFoundException e) {
+    String message = e.getMessage();
+    return new ExceptionHandResponse("0003", message, Collections.emptyList());
   }
 }

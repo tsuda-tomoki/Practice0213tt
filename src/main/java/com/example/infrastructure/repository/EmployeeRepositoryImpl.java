@@ -3,6 +3,7 @@ package com.example.infrastructure.repository;
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
 import com.example.infrastructure.mapper.EmployeeMapper;
+import com.example.presentation.exception.EmployeesNotFoundException;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
@@ -25,8 +26,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
   }
 
   @Override
-  public Optional<Employee> findByEmployeeOfRepository(String id) {
-    return Optional.ofNullable(employeeMapper.findById(id));
+  public Employee findByEmployeeOfRepository(String id) {
+    if (employeeMapper.findById(id) == null) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
+    return employeeMapper.findById(id);
   }
 
   @Override
@@ -36,11 +40,20 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   @Override
   public void deleteByEmployeeOfRepository(String id) {
+    Integer count = employeeMapper.delete(id);
+    if (count == 0) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
+
     employeeMapper.delete(id);
   }
 
   @Override
   public void updateByEmployeeOfRepository(String id, UpdateEmployeeRequest updateEmployeeRequest) {
+    Integer count = employeeMapper.update(id, updateEmployeeRequest);
+    if (count == 0) {
+      throw new EmployeesNotFoundException("specified employee [id = " + id + "] is not found.");
+    }
     employeeMapper.update(id, updateEmployeeRequest);
   }
 }
