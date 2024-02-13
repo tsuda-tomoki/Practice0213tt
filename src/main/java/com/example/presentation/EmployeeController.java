@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 /**
- * 従業員を管理するコントローラークラスです.
+ * 従業員を管理するコントローラークラス.
  */
 @RestController
 @AllArgsConstructor

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * コントローラークラスの例外ハンドリングを行うクラスです.
+ * コントローラークラスの例外ハンドリングを行うクラス.
  */
 @RestControllerAdvice
 public class ExceptionsController {
@@ -25,7 +25,7 @@ public class ExceptionsController {
    */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ExceptionResponse handleError(
+  public ExceptionResponse handleMethodArgumentNotValidException(
       MethodArgumentNotValidException methodArgumentNotValidException) {
     List<String> detailsList = List.of("firstName must not be blank");
     return new ExceptionResponse("0002", "request validation error is occurred.", detailsList);

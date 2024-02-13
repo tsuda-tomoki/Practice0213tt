@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * EmployeeRepository の実装クラス.
+ * employee データベースにアクセスします.
  */
 @Repository
 @AllArgsConstructor
@@ -19,11 +20,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
   private EmployeeMapper employeeMapper;
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public List<Employee> findByAllEmployeesOfRepository() {
     return employeeMapper.findAll();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Employee findByEmployeeOfRepository(String id) {
     if (employeeMapper.findById(id) == null) {
@@ -32,11 +39,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     return employeeMapper.findById(id);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void insertByEmployeeOfRepositroy(PostEmployeeRequest postEmployeeRequest) {
     employeeMapper.insert(postEmployeeRequest);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void deleteByEmployeeOfRepository(String id) {
     Integer count = employeeMapper.delete(id);
@@ -47,6 +60,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     employeeMapper.delete(id);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void updateByEmployeeOfRepository(String id, UpdateEmployeeRequest updateEmployeeRequest) {
     Integer count = employeeMapper.update(id, updateEmployeeRequest);

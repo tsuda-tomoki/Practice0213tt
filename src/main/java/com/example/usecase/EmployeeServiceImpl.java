@@ -11,37 +11,53 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * employeeService の実装クラス.
+ * 従業員関連のビジネスロジックを実装するサービスクラス.
  */
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
+
   private EmployeeRepository employeeRepository;
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @Transactional(readOnly = true)
   public List<Employee> findByAllEmployeesOfService() {
     return employeeRepository.findByAllEmployeesOfRepository();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @Transactional(readOnly = true)
   public Employee findByEmployeeIdOfService(String id) {
     return employeeRepository.findByEmployeeOfRepository(id);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @Transactional
   public void insertByEmployeeOfService(PostEmployeeRequest postEmployeeRequest) {
     employeeRepository.insertByEmployeeOfRepositroy(postEmployeeRequest);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @Transactional
   public void deleteByEmployeeOfService(String id) {
     employeeRepository.deleteByEmployeeOfRepository(id);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @Transactional
   public void updateByEmployeeOfService(String id, UpdateEmployeeRequest updateEmployeeRequest) {
