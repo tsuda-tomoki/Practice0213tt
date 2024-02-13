@@ -4,7 +4,6 @@ import com.example.domain.entity.Employee;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * employees テーブルにアクセスするためのリポジトリ.

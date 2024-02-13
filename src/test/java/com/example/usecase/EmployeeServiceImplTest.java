@@ -2,11 +2,8 @@ package com.example.usecase;
 
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
-import com.example.infrastructure.mapper.EmployeeMapper;
 import com.example.presentation.request.PostEmployeeRequest;
 import com.example.presentation.request.UpdateEmployeeRequest;
-import it.unibo.tuprolog.solve.stdlib.primitive.Op;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,7 +13,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
