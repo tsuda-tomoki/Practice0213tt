@@ -1,6 +1,6 @@
 package com.example.presentation;
 
-import com.example.presentation.exception.EmployeesNotFoundException;
+import com.example.domain.exception.EmployeesNotFoundException;
 import com.example.presentation.response.ExceptionHandResponse;
 import com.example.presentation.response.ExceptionResponse;
 import java.util.Collections;

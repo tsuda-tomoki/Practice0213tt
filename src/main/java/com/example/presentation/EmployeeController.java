@@ -2,8 +2,8 @@ package com.example.presentation;
 
 import com.example.domain.entity.Employee;
 import com.example.domain.service.EmployeeService;
-import com.example.presentation.request.PostEmployeeRequest;
-import com.example.presentation.request.UpdateEmployeeRequest;
+import com.example.domain.request.PostEmployeeRequest;
+import com.example.domain.request.UpdateEmployeeRequest;
 import com.example.presentation.response.AllEmployeesResponse;
 import java.net.URI;
 import lombok.AllArgsConstructor;
@@ -71,7 +71,8 @@ public class EmployeeController {
    */
   @PostMapping("/v1/employees")
   @ResponseStatus(HttpStatus.CREATED)
-  public ResponseEntity<Employee> insertByEmployee(@RequestBody @Validated PostEmployeeRequest postEmployeeRequest) {
+  public ResponseEntity<Employee> insertByEmployee(
+      @RequestBody @Validated PostEmployeeRequest postEmployeeRequest) {
     employeeService.insertByEmployeeOfService(postEmployeeRequest);
     URI location =
         ServletUriComponentsBuilder.fromCurrentRequest()
@@ -94,12 +95,13 @@ public class EmployeeController {
   /**
    * ID指定で従業員情報を更新します.
    *
-   * @param id 従業員のID
+   * @param id                    従業員のID
    * @param updateEmployeeRequest 更新された従業員情報を含むリクエスト
    */
   @PatchMapping("/v1/employees/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void updateByEmployee(@PathVariable String id, @RequestBody @Validated UpdateEmployeeRequest updateEmployeeRequest) {
+  public void updateByEmployee(@PathVariable String id,
+      @RequestBody @Validated UpdateEmployeeRequest updateEmployeeRequest) {
     employeeService.updateByEmployeeOfService(id, updateEmployeeRequest);
   }
 }

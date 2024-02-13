@@ -1,4 +1,4 @@
-package com.example.presentation.request;
+package com.example.domain.request;
 
 import jakarta.validation.constraints.NotBlank;
 

@@ -8,8 +8,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.domain.service.EmployeeService;
-import com.example.presentation.exception.EmployeesNotFoundException;
-import com.example.presentation.request.UpdateEmployeeRequest;
+import com.example.domain.exception.EmployeesNotFoundException;
+import com.example.domain.request.UpdateEmployeeRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

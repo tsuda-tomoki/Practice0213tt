@@ -1,4 +1,4 @@
-package com.example.presentation.exception;
+package com.example.domain.exception;
 
 /**
  * 従業員が見つからない場合にスローされる例外クラス.

@@ -1,8 +1,8 @@
 package com.example.domain.repository;
 
 import com.example.domain.entity.Employee;
-import com.example.presentation.request.PostEmployeeRequest;
-import com.example.presentation.request.UpdateEmployeeRequest;
+import com.example.domain.request.PostEmployeeRequest;
+import com.example.domain.request.UpdateEmployeeRequest;
 import java.util.List;
 
 /**

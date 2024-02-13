@@ -2,8 +2,8 @@ package com.example.usecase;
 
 import com.example.domain.entity.Employee;
 import com.example.domain.repository.EmployeeRepository;
-import com.example.presentation.request.PostEmployeeRequest;
-import com.example.presentation.request.UpdateEmployeeRequest;
+import com.example.domain.request.PostEmployeeRequest;
+import com.example.domain.request.UpdateEmployeeRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

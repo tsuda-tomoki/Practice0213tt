@@ -1,4 +1,4 @@
-package com.example.presentation.request;
+package com.example.domain.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
